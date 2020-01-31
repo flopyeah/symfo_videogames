@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+<div class="mt-5">
+    <a class="btn btn-primary btn-lg btn-block" href="{{ path('admin_game') }}">Gérer les jeux videos</a>
+    <a class="btn btn-primary btn-lg btn-block" href="{{ path('admin_console') }}">Gérer Consoles</a>
+</div>
+{% endblock %}

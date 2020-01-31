@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeux Videos{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+
+    <div class="row">
+        {% for console in consoles  %}
+            <div class="col-3">
+                <a href="{{ path('consoles_show', {'id' : console.id } ) }}">
+                    <img src="{{ console.image }}" alt="" height="300">
+                    <br>
+                    <h3>{{ console.nom }}</h3>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

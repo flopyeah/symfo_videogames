@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeux Videos{% endblock %}
+
+{% block body %}
+        <div class="row">
+                {% for jeu in jeuVideos  %}
+                        <div class="col-3">
+                                <a href="{{ path('games_show', {'id' : jeu.id } ) }}">
+                                        <img src="{{ jeu.image }}" alt="" height="300">
+                                        <br>
+                                        <h3>{{ jeu.titre }}</h3>
+                                </a>
+                        </div>
+                {% endfor %}
+        </div>
+{% endblock %}

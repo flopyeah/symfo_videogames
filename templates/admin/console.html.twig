@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+
+    <a href="{{ path('admin_console_add' ) }}" class="btn btn-primary m-2">Ajouter une console</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Console</th>
+            <th scope="col">Marque</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for console in consoles  %}
+            <tr>
+                <th scope="row"><img src="{{ console.image }}" alt="" height="40"></th>
+                <td><b>{{ console.nom }}</b></td>
+                <td>{{ console.marque }}</td>
+                <td>
+                    <a href="{{ path('admin_console_modify', {'id' : console.id } ) }}" class="btn btn-primary">modifier</a>
+                    <form method="post" action="{{ path('admin_console_delete', {'id': console.id}) }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ console.id) }}">
+                        <button class="btn btn-danger">supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

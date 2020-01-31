@@ -1,0 +1,13 @@
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Consoles
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for console in consoles  %}
+                        <a class="dropdown-item" href="{{ path('consoles_show', {'id' : console.id } ) }}">{{ console.nom }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+
+
