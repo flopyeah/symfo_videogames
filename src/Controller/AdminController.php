@@ -20,7 +20,12 @@ class AdminController extends AbstractController
      */
     public function index()
     {
+        $user = $this->getUser();
+
+        dump($user);
+
         return $this->render('admin/admin.html.twig', [
+            'user' => $user
         ]);
     }
 
@@ -72,9 +77,13 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // je procede a l'enregistrement de mes données
-            //$jeuvideo->setCreatedAt( new \DateTime);
 
             $entityManager->persist($jeuvideo);
+
+
+            // foreach ($jeuVideo->getConsoles() as $console )             //     $console->addJeuVideo($jeuVideo);
+            // } 
+
 
             // j'enregistre les données en BDD
             $entityManager->flush();
@@ -158,11 +167,14 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/game/delete/{id}", name="admin_game_delete", methods={"DELETE"})
      */
-    public function delete_game(Request $request, JeuVideo $jeuVideo)
+    public function delete_game(Request $request, JeuVideo $jeuVideo, JeuVideoRepository $jeuVideoRepository)
     {
         if ($this->isCsrfTokenValid('delete'.$jeuVideo->getId(), $request->request->get('_token'))) {
+            // Je récupere l'entity manager 
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->remove($jeuVideo);
+            
             $entityManager->flush();
         }
 

@@ -43,9 +43,15 @@ class JeuVideo
      */
     private $console;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Avis", mappedBy="jeu")
+     */
+    private $avis;
+
     public function __construct()
     {
         $this->console = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,6 +128,37 @@ class JeuVideo
     {
         if ($this->console->contains($console)) {
             $this->console->removeElement($console);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setJeu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->contains($avi)) {
+            $this->avis->removeElement($avi);
+            // set the owning side to null (unless already changed)
+            if ($avi->getJeu() === $this) {
+                $avi->setJeu(null);
+            }
         }
 
         return $this;

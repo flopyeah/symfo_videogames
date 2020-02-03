@@ -5,7 +5,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {% for console in consoles  %}
-                        <a class="dropdown-item" href="{{ path('consoles_show', {'id' : console.id } ) }}">{{ console.nom }}</a>
+                        <a class="dropdown-item" href="{{ path('consoles_show', {'id' : console.id, 'nom' : console.nom } ) }}">{{ console.nom }}</a>
                     {% endfor %}
                 </div>
             </li>

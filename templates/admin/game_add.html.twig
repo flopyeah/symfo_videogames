@@ -3,5 +3,22 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-    {{ form(form) }}
+    {{ form_start(form) }}
+
+<div class="row">
+        <div class="col-8">
+                {{ form_row(form.titre) }}
+                {{ form_row(form.prix) }}
+                {{ form_row(form.image) }}
+                {{ form_row(form.dateSortie) }}
+        </div>
+        <div class="col-4">
+            {{ form_row(form.console) }}
+        </div>
+</div>
+{{ form_row(form.ajouter) }}
+    {{ form_end(form) }}
+
+
+
 {% endblock %}

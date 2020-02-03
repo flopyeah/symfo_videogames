@@ -25,8 +25,8 @@ class JeuVideoRepository extends ServiceEntityRepository
 
     public function findHome($limit)
     {
-        return $this->createQueryBuilder('j')
-            ->orderBy('j.id', 'DESC')
+        return $this->createQueryBuilder('jeuvideo')
+            ->orderBy('jeuvideo.id', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()

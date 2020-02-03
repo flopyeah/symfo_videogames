@@ -22,7 +22,7 @@ class ConsoleController extends AbstractController
     }
 
     /**
-     * @Route("/consoles/{id}", name="consoles_show")
+     * @Route("/consoles/{id}/{nom}", name="consoles_show")
      */
     public function show(ConsoleRepository $consoleRepository, $id)
     {

@@ -3,14 +3,52 @@
 {% block title %}Jeux Videos{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
+<div class="example-wrapper row ">
+<div class="col-5">
     <h1>{{ jeuvideo.titre }}</h1>
     <h3>{{ jeuvideo.prix | number_format(2, '.', ',') ~ '€' }}</h3>
-    <img src="{{ jeuvideo.image }}" alt="" width="400">
+    <img src="{{ jeuvideo.image }}" alt="" width="200">
 
     <h4>Disponible sur : </h4>
+
     {% for console in jeuvideo.console  %}
-        <a class="dropdown-item" href="{{ path('consoles_show', {'id' : console.id } ) }}">{{ console.nom }}</a>
+        <a class="dropdown-item" href="{{ path('consoles_show', {'id' : console.id , 'nom' : console.nom } ) }}">{{ console.nom }} - {{ console.marque }}</a>
     {% endfor %}
+</div>
+<div class="col-7">
+    <h4>Les avis : </h4>
+
+    {{ form(form_avis) }}
+ 
+<p>
+    moyenne : {{ note.moyenne|round(1, 'ceil') }}/5
+</p>
+
+ <ul class="list-group">
+    {% for avis in list_avis %}
+        <li class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{avis.user.prenom }} {{avis.user.nom }}</h5>
+                <small class="text-muted">
+                    
+                    {% if app.user == avis.user %}
+                        
+                        <form method="post" action="{{ path('avis_delete', {'id': avis.id}) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avis.id) }}">
+                            <button class="btn btn-danger">supprimer</button>
+                        </form>
+
+                    {% endif %}
+                </small>
+            </div>
+            <small class="text-muted">note : {{ avis.note }}/5</small>
+            <p class="mb-1">{{ avis.commentaire }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+</div>
+
 </div>
 {% endblock %}

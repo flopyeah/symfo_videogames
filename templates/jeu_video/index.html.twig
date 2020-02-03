@@ -11,6 +11,7 @@
                 <img src="{{ jeu.image }}" alt="" height="300">
                 <br>
                 <h3>{{ jeu.titre }}</h3>
+                <h3>{{ jeu.prix ~ '€'}}</h3>
             </a>
         </div>
     {% endfor %}
@@ -19,7 +20,7 @@
     <div class="row">
         {% for console in consoles  %}
             <div class="col-3">
-                <a href="{{ path('consoles_show', {'id' : console.id } ) }}">
+                <a href="{{ path('consoles_show', {'id' : console.id , 'nom' : console.nom } ) }}">
                     <img src="{{ console.image }}" alt="" height="300">
                     <br>
                     <h3>{{ console.nom }}</h3>
